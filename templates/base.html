@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <a href="{{ url_for('add_book') }}">Add Book</a>
+                <a href="{{ url_for('security.logout') }}">Logout</a>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content">
+        {% block content %}
+        <!-- Zawartość będzie wstawiana tutaj w innych szablonach -->
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Todo App</p>
+    </footer>
+</body>
+</html>
