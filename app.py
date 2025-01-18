@@ -10,6 +10,7 @@ app.config['SECURITY_PASSWORD_SALT'] = os.environ.get('SECURITY_PASSWORD_SALT', 
 app.config['SECURITY_REGISTERABLE'] = True
 app.config['SECURITY_SEND_REGISTER_EMAIL'] = False
 
+
 db = SQLAlchemy(app)
 
 # Relacje użytkownik-role
