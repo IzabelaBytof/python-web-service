@@ -1,21 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblioteka</title>
-</head>
-<body>
-    <h1>Twoje książki</h1>
-    <a href="{{ url_for('add_book') }}">Dodaj książkę</a>
-    <ul>
-        {% for book in books %}
-            <li>
-                {{ book.title }} by {{ book.author }} {% if book.read %} (Przeczytana) {% else %} (Nieprzeczytana) {% endif %}
-                <a href="{{ url_for('mark_read', book_id=book.id) }}">Zmień status</a>
-                <a href="{{ url_for('delete_book', book_id=book.id) }}" onclick="return confirm('Czy na pewno chcesz usunąć tę książkę?')">Usuń</a>
-            </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends "base.html" %} {% block title %}Twoje Książki{% endblock %} {% block
+content %}
+<h1>Twoje książki</h1>
+<a href="{{ url_for('add_book') }}">Dodaj książkę</a>
+<ul>
+  {% for book in books %}
+  <li>
+    {{ book.title }} by {{ book.author }} {% if book.read %} (Przeczytana) {%
+    else %} (Nieprzeczytana) {% endif %}
+    <a href="{{ url_for('mark_read', book_id=book.id) }}">Zmień status</a>
+    <a
+      href="{{ url_for('delete_book', book_id=book.id) }}"
+      onclick="return confirm('Czy na pewno chcesz usunąć tę książkę?')"
+      >Usuń</a
+    >
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
