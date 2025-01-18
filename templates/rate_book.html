@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block title %}Oceń książkę{% endblock %} {% block
+content %}
+<h1>Oceń książkę</h1>
+<form method="POST">
+  <label for="title">Oena: </label>
+  <input
+    type="number"
+    id="rating"
+    name="rating"
+    step="0.1"
+    min="0"
+    max="5"
+    required
+  />/5<br /><br />
+  <button type="submit">Zatwierdź</button>
+</form>
+{% endblock %}

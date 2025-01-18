@@ -45,6 +45,7 @@ class Book(db.Model):
     title = db.Column(db.String(100), nullable=False)
     author = db.Column(db.String(100), nullable=False)
     read = db.Column(db.Boolean, default=False)
+    rating = db.Column(db.Float, nullable = True)
     user_id = db.Column(db.String(255), db.ForeignKey('user.fs_uniquifier'))
 
 # Konfiguracja Flask-Security
@@ -84,6 +85,19 @@ def mark_read(book_id):
         db.session.commit()
     return redirect(url_for("index"))
 
+@app.route("/rate-book/<int:book_id>", methods=["GET", "POST"])
+@login_required
+def rate_book(book_id):
+    if request.method == "POST":
+        book = Book.query.get_or_404(book_id)
+        if book.user_id == current_user.get_id():
+            book.rating = request.form['rating']
+            
+        db.session.commit()
+        return redirect(url_for("index"))
+
+    return render_template("rate_book.html")
+
 # Usuwanie książek
 @app.route("/delete-book/<int:book_id>")
 @login_required
@@ -99,3 +113,4 @@ if __name__ == "__main__":
         db.create_all()
     app.run(host='0.0.0.0', port=5000, debug=True)
 
+    
