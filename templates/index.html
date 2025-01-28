@@ -1,23 +1,26 @@
 {% extends "base.html" %} {% block title %}Twoje Książki{% endblock %} {% block
 content %}
-<h1>Twoje książki</h1>
-<a href="{{ url_for('add_book') }}">Dodaj książkę</a>
-<ul>
-  {% for book in books %}
-  <li>
-    {{ book.title }} by {{ book.author }} {% if book.read %} (Przeczytana) {%
-    else %} (Nieprzeczytana) {% endif %}
-    <a href="{{ url_for('mark_read', book_id=book.id) }}">Zmień status</a>
-    {% if book.read %}
-    <a href="{{ url_for('rate_book', book_id=book.id) }}">Oceń książkę</a>
-    {% if book.rating != 0 %} Ocena: {{ book.rating }} /5 {% endif %} {% endif
-    %}
-    <a
-      href="{{ url_for('delete_book', book_id=book.id) }}"
-      onclick="return confirm('Czy na pewno chcesz usunąć tę książkę?')"
-      >Usuń</a
-    >
-  </li>
-  {% endfor %}
-</ul>
+<div class="container bg-success bg-gradient">
+  <h1 class="text-center">Twoje książki</h1>
+</div>
+<div class="container bg-light bg-gradient border border-success border-5">
+  <ul>
+    {% for book in books %}
+    <li>
+      {{ book.title }} by {{ book.author }} {% if book.read %} (Przeczytana) {%
+      else %} (Nieprzeczytana) {% endif %}
+      <a href="{{ url_for('mark_read', book_id=book.id) }}">Zmień status</a>
+      {% if book.read %}
+      <a href="{{ url_for('rate_book', book_id=book.id) }}">Oceń książkę</a>
+      {% if book.rating != None %} Ocena: {{ book.rating }} /5 {% endif %} {%
+      endif %}
+      <a
+        href="{{ url_for('delete_book', book_id=book.id) }}"
+        onclick="return confirm('Czy na pewno chcesz usunąć tę książkę?')"
+        >Usuń</a
+      >
+    </li>
+    {% endfor %}
+  </ul>
+</div>
 {% endblock %}
