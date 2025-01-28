@@ -1,7 +1,12 @@
 {% extends "base.html" %} {% block title %}Twoje Książki{% endblock %} {% block
 content %}
-<div class="container bg-success bg-gradient">
-  <h1 class="fw-bold text-center text-white">Twoje książki</h1>
+<div class="container col-4 bg-success bg-gradient">
+  <h1 class="fw-bold text-center text-white">
+    {% if not books %} Brak książek 
+    {% else %}
+    Twoje książki
+    {% endif %}
+    </h1>
 </div>
 
   <ul>
@@ -11,14 +16,14 @@ content %}
       {{ book.title }} by {{ book.author }} {% if book.read %} (Przeczytana) {%
       else %} (Nieprzeczytana) {% endif %}
       <div class="d-flex justify-content-end">
-      <a href="{{ url_for('mark_read', book_id=book.id) }}" class="btn btn-success me-1" role="button">Zmień status</a>
+      <a href="{{ url_for('mark_read', book_id=book.id) }}" class="btn btn-outline-success me-1" role="button">Zmień status</a>
       {% if book.read %}
-      <a href="{{ url_for('rate_book', book_id=book.id) }}" class="btn btn-primary me-1" role="button">Oceń książkę</a>
+      <a href="{{ url_for('rate_book', book_id=book.id) }}" class="btn btn-outline-primary me-1" role="button">Oceń książkę</a>
       {% if book.rating != None %} 
-      <button type="button" class="btn btn-info me-1">Ocena: {{ book.rating }} /5 </button>  {% endif %} {%
+      <button type="button" class="btn btn-warning me-1" disabled>Ocena: {{ book.rating }} /5 </button>  {% endif %} {%
       endif %}
       <a
-        href="{{ url_for('delete_book', book_id=book.id) }}" class="btn btn-danger" role="button"
+        href="{{ url_for('delete_book', book_id=book.id) }}" class="btn btn-outline-danger" role="button"
         onclick="return confirm('Czy na pewno chcesz usunąć tę książkę?')"
         >Usuń</a
       >

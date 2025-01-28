@@ -84,7 +84,7 @@ def mark_read(book_id):
         book.read = not book.read
         db.session.commit()
     return redirect(url_for("index"))
-
+#Ocenianie książek
 @app.route("/rate-book/<int:book_id>", methods=["GET", "POST"])
 @login_required
 def rate_book(book_id):
@@ -96,7 +96,7 @@ def rate_book(book_id):
         db.session.commit()
         return redirect(url_for("index"))
 
-    return render_template("rate_book.html")
+    return render_template("rate_book.html", book=Book.query.get_or_404(book_id))
 
 # Usuwanie książek
 @app.route("/delete-book/<int:book_id>")

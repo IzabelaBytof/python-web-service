@@ -1,17 +1,26 @@
 {% extends "base.html" %} {% block title %}Oceń książkę{% endblock %} {% block
 content %}
-<h1 class="center">Oceń książkę</h1>
-<form method="POST">
-  <label for="title">Oena: </label>
-  <input
-    type="number"
-    id="rating"
-    name="rating"
-    step="0.5"
-    min="0"
-    max="5"
-    required
-  />/5<br /><br />
-  <button type="submit">Zatwierdź</button>
-</form>
+<div class="container col-4 bg-success bg-gradient">
+  <h1 class="fw-bold text-center text-white">Oceń książkę: {{ book.title }}</h1>
+</div>
+<div
+  class="container col-5 text-center mt-3 py-1 ps-4 bg-light bg-gradient border border-success border-5"
+>
+  <form method="POST">
+    <label for="title">Oena: </label>
+    <input
+      type="number"
+      id="rating"
+      name="rating"
+      step="0.5"
+      min="0"
+      max="5"
+      required
+    />/5<br /><br />
+    <button class="btn btn-success" type="submit">Zatwierdź</button>
+  </form>
+</div>
+<a href="{{ url_for('index') }}" class="btn btn-warning" role="button"
+  >Powrót do książek</a
+>
 {% endblock %}
