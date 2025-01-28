@@ -1,26 +1,31 @@
 {% extends "base.html" %} {% block title %}Twoje Książki{% endblock %} {% block
 content %}
 <div class="container bg-success bg-gradient">
-  <h1 class="text-center">Twoje książki</h1>
+  <h1 class="fw-bold text-center text-white">Twoje książki</h1>
 </div>
-<div class="container bg-light bg-gradient border border-success border-5">
+
   <ul>
     {% for book in books %}
+    <div class="container col-11 mt-3 py-1 ps-4 bg-light bg-gradient border border-success border-5">
     <li>
       {{ book.title }} by {{ book.author }} {% if book.read %} (Przeczytana) {%
       else %} (Nieprzeczytana) {% endif %}
-      <a href="{{ url_for('mark_read', book_id=book.id) }}">Zmień status</a>
+      <div class="d-flex justify-content-end">
+      <a href="{{ url_for('mark_read', book_id=book.id) }}" class="btn btn-success me-1" role="button">Zmień status</a>
       {% if book.read %}
-      <a href="{{ url_for('rate_book', book_id=book.id) }}">Oceń książkę</a>
-      {% if book.rating != None %} Ocena: {{ book.rating }} /5 {% endif %} {%
+      <a href="{{ url_for('rate_book', book_id=book.id) }}" class="btn btn-primary me-1" role="button">Oceń książkę</a>
+      {% if book.rating != None %} 
+      <button type="button" class="btn btn-info me-1">Ocena: {{ book.rating }} /5 </button>  {% endif %} {%
       endif %}
       <a
-        href="{{ url_for('delete_book', book_id=book.id) }}"
+        href="{{ url_for('delete_book', book_id=book.id) }}" class="btn btn-danger" role="button"
         onclick="return confirm('Czy na pewno chcesz usunąć tę książkę?')"
         >Usuń</a
       >
+    </div>
+    </div>
     </li>
     {% endfor %}
   </ul>
-</div>
+
 {% endblock %}
