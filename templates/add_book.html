@@ -1,21 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dodaj książkę</title>
-</head>
-<body>
-    <h1>Dodaj książkę</h1>
-    <form method="POST">
-        <label for="title">Tytuł:</label>`
-        <input type="text" id="title" name="title" required><br><br>
+{% extends "base.html" %} {% block title %}Dodaj książkę{% endblock %} {% block
+content %}
 
-        <label for="author">Autor:</label>
-        <input type="text" id="author" name="author" required><br><br>
+<h1>Dodaj książkę</h1>
+<form method="POST">
+  <label for="title">Tytuł:</label>
+  <input type="text" id="title" name="title" required /><br /><br />
 
-        <button type="submit">Dodaj książkę</button>
-    </form>
-    <a href="{{ url_for('index') }}">Powrót do książek</a>
-</body>
-</html>
+  <label for="author">Autor:</label>
+  <input type="text" id="author" name="author" required /><br /><br />
+
+  <button type="submit">Dodaj książkę</button>
+</form>
+<a href="{{ url_for('index') }}">Powrót do książek</a>
+{% endblock %}
