@@ -1,0 +1,53 @@
+{% if security.registerable or security.recoverable or security.confirmable or
+security.unified_signin or security.two_factor or security.webauthn %}
+<div id="menu">
+  <h2>{{ _fsdomain('Menu') }}</h2>
+  {% if _fs_is_user_authenticated(current_user) %} {# already authenticated user
+  #}
+  <a href="{{ url_for_security('logout') }}">{{ _fsdomain("Sign out") }}</a>
+  {% if security.changeable %}
+  <a href="{{ url_for_security('change_password') }}"
+    >{{ _fsdomain("Change Password") }}</a
+  >
+  {% endif %} {% if security.change_email %}
+  <a href="{{ url_for_security('change_email') }}"
+    >{{ _fsdomain("Change Registered Email") }}</a
+  >
+  {% endif %} {% if security.two_factor %}
+  <a href="{{ url_for_security('two_factor_setup') }}"
+    >{{ _fsdomain("Two Factor Setup") }}</a
+  >
+  {% endif %} {% if security.unified_signin %}
+  <a href="{{ url_for_security('us_setup') }}"
+    >{{ _fsdomain("Unified Signin Setup") }}</a
+  >
+  {% endif %} {% if security.webauthn %}
+  <a href="{{ url_for_security('wan_register') }}"
+    >{{ _fsdomain("WebAuthn Setup") }}</a
+  >
+  {% endif %} {% else %} {% if not skip_login_menu %}
+  <a
+    href="{{ url_for_security('login') }}{%- if 'next' in request.args -%}?next={{ request.args.next|urlencode }}{%- endif -%}"
+    >{{ _fsdomain('Login') }}</a
+  >
+  {% endif %} {% if security.unified_signin and not skip_login_menu %}
+  <a
+    href="{{ url_for_security('us_signin') }}{%- if 'next' in request.args -%}?next={{ request.args.next|urlencode }}{%- endif -%}"
+    >{{ _fsdomain('Unified Sign In') }}</a
+  >
+  {% endif %} {% if security.registerable %}
+  <a
+    href="{{ url_for_security('register') }}{%- if 'next' in request.args -%}?next={{ request.args.next|urlencode }}{%- endif -%}"
+    >{{ _fsdomain('Register') }}</a
+  >
+  {% endif %} {% if security.recoverable %}
+  <a href="{{ url_for_security('forgot_password') }}"
+    >{{ _fsdomain('Forgot password') }}</a
+  >
+  {% endif %} {% if security.confirmable %}
+  <a href="{{ url_for_security('send_confirmation') }}"
+    >{{ _fsdomain('Confirm account') }}</a
+  >
+  {% endif %} {% endif %}
+</div>
+{% endif %}
